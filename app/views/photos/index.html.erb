@@ -1,9 +1,12 @@
-<h1><%= @photos.inspect %></h1>
+<h1>All Our Photos</h1>
 
 <% @photos.each do |photo| %>
   <div>
     <h1><%= photo.location %></h1><br />
-    <i><%= place.caption %></i><br />
+    <i><%= photo.caption %></i><br />
+    <div class="col-12 col-sm-4" style="padding-top:30px;">
+      <%= image_tag( photo.picture.url, :class => "style_image") %>
+    </div>
   </div>
 
   <hr />
