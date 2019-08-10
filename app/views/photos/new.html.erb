@@ -3,7 +3,9 @@
   <%= simple_form_for @photo do |f| %>
     <%= f.input :location %>
     <%= f.input :caption %>
+     <%= f.input :date %>
     <%= f.input :picture %>
+
     <br />
     <%= f.submit 'Create', class: 'btn btn-primary' %>
   <% end %>
