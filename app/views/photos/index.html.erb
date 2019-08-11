@@ -1,14 +1,27 @@
 <h1>All Our Photos</h1>
 
 <% @photos.each do |photo| %>
-  <div class="booyah-box col-10 offset-1">
-    <h1><%= photo.location %></h1><br />
-    <i><%= photo.date  %></i>
-    <i><%= photo.caption %><br /></i><br />
-
-    <div class="col-12 col-sm-4" style="padding-top:30px;">
-      <%= image_tag( photo.picture.url, :class => "style_image") %>
+    <div class="booyah-box col-8 offset-2">
+        
+      <div class="row">
+        <div class="imageHolder col-sm-7">
+            <%= image_tag( photo.picture.url, :class => "style_image") %>
+        </div>
+       
+        <div>
+            <br />
+            LOCATION: &nbsp&nbsp<i><%= photo.location %></i><br />
+            DATE: &nbsp&nbsp&nbsp &nbsp &nbsp &nbsp &nbsp<i> <%= photo.date  %></i><br />
+        </div>
+      </div><br />
+      <h2><%= photo.caption %></h2> 
     </div>
-  </div>
 
 <% end %>
+
+<div class="apple_pagination">
+  <div class="page_info">
+    <%= page_entries_info @tasks %>
+  </div>
+  <%= will_paginate @tasks, :container => false %>
+</div>

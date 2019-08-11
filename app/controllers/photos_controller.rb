@@ -1,6 +1,7 @@
 class PhotosController < ApplicationController
     def index
         @photos = Photo.all
+        @photos = Photo.search(params[:term], params[:page])
     end
 
     def new

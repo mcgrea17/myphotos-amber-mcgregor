@@ -74,3 +74,6 @@ end
 gem 'carrierwave', '~> 1.0'
 gem "figaro"
 gem "fog-aws"
+gem 'will_paginate', '>= 3.1'
+gem "font-awesome-rails"
+gem 'devise'
