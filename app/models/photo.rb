@@ -1,5 +1,6 @@
 class Photo < ApplicationRecord
     mount_uploader :picture, PictureUploader
+    has_many :photopersons
 
     def self.search(term, current_page)
         if term

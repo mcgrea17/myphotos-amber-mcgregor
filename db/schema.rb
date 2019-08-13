@@ -10,10 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_11_034831) do
+ActiveRecord::Schema.define(version: 2019_08_13_201326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "locations", force: :cascade do |t|
+    t.string "name"
+    t.text "address"
+    t.integer "location_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "people", force: :cascade do |t|
+    t.string "firstName"
+    t.string "lastName"
+    t.date "birthday"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "photopeople", force: :cascade do |t|
+    t.integer "people_id"
+    t.integer "photo_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "photos", force: :cascade do |t|
     t.string "caption"
@@ -22,6 +45,8 @@ ActiveRecord::Schema.define(version: 2019_08_11_034831) do
     t.datetime "updated_at", null: false
     t.string "picture"
     t.date "date"
+    t.integer "location_id"
+    t.index ["location_id"], name: "index_photos_on_location_id"
   end
 
   create_table "users", force: :cascade do |t|
