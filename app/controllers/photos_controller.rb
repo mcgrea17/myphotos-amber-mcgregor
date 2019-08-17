@@ -1,4 +1,6 @@
 class PhotosController < ApplicationController
+    before_action :authenticate_user!, only: [:new, :create]
+
     def index
         @photos = Photo.all
         @photos = Photo.search(params[:term], params[:page])
@@ -9,8 +11,12 @@ class PhotosController < ApplicationController
     end
 
     def create
-        Photo.create(photo_params)
-        redirect_to root_path
+        @photo =Photo.create(photo_params)
+        if @photo.valid?
+          redirect_to root_path
+        else
+          render :new, status: :unprocessable_entity
+        end
       end
     
       private

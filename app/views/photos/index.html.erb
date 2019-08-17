@@ -2,10 +2,21 @@
 
 <% @photos.each do |photo| %>
     <div class="booyah-box col-8 offset-2">
+      <div class="container mt-5 mb-5">
+
+    
+                  
+      <%= image_tag( photo.picture.url, 
+            :width => "100", :class => "mybox mb-2" )  %>
+      <%= image_tag( photo.picture.url, 
+            :width => "100", :class => "mybox mb-2" )  %>
         
+      </div>
+
       <div class="row">
-        <div class="imageHolder col-sm-7">
-            <%= image_tag( photo.picture.url, :class => "style_image") %>
+        <div class=" col-sm-7">
+            <%= image_tag( photo.picture.url, 
+            data: {"data-lightbox" => "image"}, :class => "style_image img-fluid" )  %>
         </div>
        
         <div>

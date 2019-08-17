@@ -1,0 +1,21 @@
+<div class="clear"></div>
+<div class="ml-5 mb-5">
+    <br/>
+    <%= form_with model: @person do |person_form| %>
+      <%= person_form.collection_select(:person, Person.all.order(:lastName),  :id,:firstName,   {},{:multiple => true}) %>
+    <% end %>
+    <br/>
+    
+    <% if current_user.try(:admin?) %>
+      <%= simple_form_for @person do |f| %> 
+          <%= f.input :firstName %>
+          <%= f.input :lastName %>
+          <%= f.input :birthday %>
+          <%= f.submit "Add a Person", class: 'btn btn-primary' %>    
+      <% end %>
+    <% else %>
+          To add a new person contact your Admin.
+    <% end %>
+  
+
+</div>

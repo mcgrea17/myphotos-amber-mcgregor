@@ -1,0 +1,41 @@
+<div class="pac-card" id="pac-card">
+  <div>
+    <div id="title">
+      Find A Location
+    </div>
+    
+  </div>
+  <div id="pac-container">
+    <br />
+      <input id="pac-input" type="text"
+          placeholder="Enter a location">
+  
+    <div class="ml-5 mb-5">
+      <br/>
+      <%= form_with model: @location do |person_form| %>
+        <%= person_form.collection_select(:location, Location.all.order("name"),  :id,:name,   {},{:multiple => true}) %>
+      <% end %>
+      <br/>
+    
+      <% if current_user.try(:admin?) %>
+        <%= simple_form_for @location do |f| %> 
+            <%= f.submit "Add a Location", class: 'btn btn-primary' %>
+        <% end %>
+      <% else %>
+        To add a new location contact your Admin.
+      <% end %>
+      
+    </div>
+  </div>
+</div>
+<div id="map"></div>
+<div id="infowindow-content">
+  <img src="" width="16" height="16" id="place-icon">
+  <span id="place-name"  class="title"></span><br>
+  <span id="place-address"></span>
+</div>
+<!-- Replace the value of the key parameter with your own API key. -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUD5WZL6Knw6AD0hMkvCbWpKpH4IdjEMI&libraries=places&callback=initMap"
+        async defer></script>
+
+<div class="clear"></div>
