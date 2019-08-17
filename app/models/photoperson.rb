@@ -1,4 +1,4 @@
 class Photoperson < ApplicationRecord
     belongs_to :photo 
-    belongd_to :person 
+    belongs_to :person 
 end
