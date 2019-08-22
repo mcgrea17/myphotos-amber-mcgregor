@@ -1,12 +1,28 @@
 <div class="booyah-box col-10 offset-1">
   <h1>Enter Your Photo Details</h1>
+   
   <%= simple_form_for @photo do |f| %>
-    <%= f.input :location %>
-    <%= f.input :caption %>
-     <%= f.input :date %>
-    <%= f.input :picture %>
+   <%= f.input :picture %><br />
+    Enter Caption <br />
+    <%= f.text_field :caption %>
+    <br/><br/>
+     Enter Date of Photo <br />
+    <%= f.text_field :date, data: {:provide => 'datepicker',:'date-format'=> "yyyy-mm-dd"}   %>
+     <br /><br />
+   
+    Enter &nbsp<%= f.label :location %><br>
+    <%= form_with model: @location do |location_form| %>
+        <%= location_form.collection_select(:location, Location.all.order("name"),  :id,:name,   {}) %>
+    <% end %><br/>
+    <%= f.label :People %>&nbsp in the Photo<br>
+    <%= form_with model: @person do |person_form| %>
+        <%= person_form.collection_select(:person, Person.all.order(:lastName),
+          :id, :unique_person,   {}, :multiple => true) %>
+    <% end %>
 
     <br />
+    <h6>Note:  If a person or location is not in list contact your admin</h6><br />
     <%= f.submit 'Create', class: 'btn btn-primary' %>
   <% end %>
 </div>
+

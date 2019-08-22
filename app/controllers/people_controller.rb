@@ -4,7 +4,8 @@ class PeopleController < ApplicationController
     
 
     def new
-        @people = Person.all
+        # @people = Person.all(:order => "lastName, firstName, birthday")
+        @people = Person.all.order(lastName: :asc, firstName: :asc , birthday: :desc)
         @person = Person.new
     end
 

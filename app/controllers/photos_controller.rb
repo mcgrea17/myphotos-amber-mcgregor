@@ -12,6 +12,7 @@ class PhotosController < ApplicationController
 
     def create
         @photo =Photo.create(photo_params)
+        @photopeople = Photopeople.create(photopeople_params)
         if @photo.valid?
           redirect_to root_path
         else
@@ -23,5 +24,9 @@ class PhotosController < ApplicationController
     
       def photo_params
         params.require(:photo).permit(:location, :caption, :picture, :date)
+      end
+
+      def photopeople_params
+        params.require(:photopeople).permit(:people_id, :photo_id)
       end
 end

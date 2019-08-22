@@ -10,15 +10,21 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require rails-ujs
-//= require activestorage
 //= require jquery
 //= require jquery_ujs
+//= require rails-ujs
+//= require activestorage
 //= require turbolinks
 //= require popper
 //= require tether
 //= require bootstrap-sprockets
+//= require bootstrap-datepicker
+//= require bootstrap-datepicker/core
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.es.js
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.fr.js
+//= require lightbox
 //= require_tree .
+
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: -33.8688, lng: 151.2195},
@@ -106,3 +112,5 @@ function initMap() {
           autocomplete.setOptions({strictBounds: this.checked});
         });
   }
+
+  
