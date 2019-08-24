@@ -20,7 +20,7 @@
     <% @photos.each do |photo| %>
       <div class="image-box">
       
-        <%= link_to(image_tag(url_for(photo.picture.url), :class => "photo-image", title: photo.caption), 
+        <%= link_to(image_tag(url_for(photo.picture.url), class: "photo-image", title: photo.caption), 
         url_for(photo.picture.url),
         data: { lightbox: "example-set", title: photo.caption, }) %>  
           <br/>

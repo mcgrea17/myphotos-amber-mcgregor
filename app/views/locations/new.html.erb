@@ -1,3 +1,15 @@
+<script>
+  $(function() {
+    $(document).on('click','#submit', function(){
+       var select_value = $('#pac-input').val();
+       $('#address1').val(select_value);
+      //  console.log(select_value );
+      //  console.log($('#address1').val());
+     });
+  });
+</script>
+
+
 <div class="pac-card" id="pac-card">
   <div>
     <div id="title">
@@ -8,23 +20,25 @@
   <div id="pac-container">
     <br />
       <input id="pac-input" type="text"
-          placeholder="Enter a location">
+          placeholder="Find a location"/>
   
     <div class="ml-5 mb-5">
-      <br/>
-      <%= form_with model: @location do |person_form| %>
-        <%= person_form.collection_select(:location, Location.all.order("name"),  :id,:name,   {},{:multiple => true}) %>
-      <% end %>
+      <br/>  
       <br/>
     
       <% if current_user.try(:admin?) %>
-        <%= simple_form_for @location do |f| %> 
-            <%= f.submit "Add a Location", class: 'btn btn-primary' %>
+        <%= simple_form_for @location do |f| %>   
+          <%= f.hidden_field :address, id: "address1" %>  
+          <%= f.input :name, label: "Enter a Location Alias" %>
+          <%= f.submit "Add a Location", class: 'btn btn-primary', id: 'submit' %>
         <% end %>
       <% else %>
         To add a new location contact your Admin.
       <% end %>
-      
+      <br /><br />
+      <%= form_with model: @location do |person_form| %>
+        <%= person_form.collection_select(:location, Location.all.order("name"),  :id, :unique_location,   {},{:multiple => true}) %>
+      <% end %>
     </div>
   </div>
 </div>

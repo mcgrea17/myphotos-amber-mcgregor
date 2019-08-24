@@ -1,13 +1,9 @@
 <%# /* Preload images */ %>
+
 body:after {
   content: url(<%= image_path('close.png')%>) url(<%= image_path('loading.gif')%>) url(<%= image_path('prev.png')%>) url(<%= image_path('next.png')%>);
   display: none;
 }
-
-medium-image {
-width: 350;
-}
-
 
 
 body.lb-disable-scrolling {

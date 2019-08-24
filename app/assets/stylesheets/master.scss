@@ -21,10 +21,21 @@
   background: #4193da;
   color: #e0dfec;
   border-radius: 20px;
+  padding-bottom: 5px;
   border: 8px solid rgb(246, 245, 250);
   -moz-box-shadow: 1px 1px 2px 0 #d0d0d0;
   -webkit-box-shadow: 1px 1px 2px 0 #d0d0d0;
   box-shadow: 1px 1px 2px 0 #d0d0d0;
+}
+
+.entry-box {
+  width: 50%;
+  float: left;
+  margin-left: 2.5%;
+}
+
+.submit {
+  margin-left: 2.5%;
 }
 .image-box {
   float: left;

@@ -1,28 +1,53 @@
-<div class="booyah-box col-10 offset-1">
-  <h1>Enter Your Photo Details</h1>
-   
-  <%= simple_form_for @photo do |f| %>
-   <%= f.input :picture %><br />
-    Enter Caption <br />
-    <%= f.text_field :caption %>
-    <br/><br/>
-     Enter Date of Photo <br />
-    <%= f.text_field :date, data: {:provide => 'datepicker',:'date-format'=> "yyyy-mm-dd"}   %>
-     <br /><br />
-   
-    Enter &nbsp<%= f.label :location %><br>
-    <%= form_with model: @location do |location_form| %>
-        <%= location_form.collection_select(:location, Location.all.order("name"),  :id,:name,   {}) %>
-    <% end %><br/>
-    <%= f.label :People %>&nbsp in the Photo<br>
-    <%= form_with model: @person do |person_form| %>
-        <%= person_form.collection_select(:person, Person.all.order(:lastName),
-          :id, :unique_person,   {}, :multiple => true) %>
-    <% end %>
+<script>
+  $(function() {
+    $(document).on('change','#location_collection', function(){
+       var select_value = $(this).val();
+       $('#location_id').val(select_value);
+       console.log(select_value );
+       console.log("location" );
+      
+     });
+    
+  });
+</script>
 
-    <br />
-    <h6>Note:  If a person or location is not in list contact your admin</h6><br />
-    <%= f.submit 'Create', class: 'btn btn-primary' %>
+
+
+<div class="booyah-box col-10 offset-1 ml-5">
+  <h1> Enter Your Photo and Details</h1><br />
+  <%= simple_form_for @photo do |f| %>
+    <div class="container ">
+      <div class="row">
+        <div class="entry-box">
+            <br/><br />
+            <%= f.input :picture %>
+            Enter Caption <br />
+            <%= f.text_field :caption %><br /><br />
+            Enter <%= f.label :date %> of Photo <br/>
+            <%= f.text_field :date, data: {:provide => 'datepicker', :'date-format' => "yyyy-mm-dd"}   %>
+            <br /><br />
+        </div>
+        <div class="ml-15 float-right">
+            <br/><br />
+            Select People in the Photos<br>
+            <%= form_with model: @person do |person_form| %>
+                <%= person_form.collection_select(:person, Person.all.order(:lastName),
+                  :id, :unique_person,   {}, {multiple: true}) %>
+            <% end %>
+        </div>  
+      </div>
+      Select Location <br/>
+      <%= f.hidden_field :location_id, id: "location_id" %>
+      <%= form_with model: @location do |location_form| %>
+          <%= location_form.collection_select(:location, Location.all.order("name"), 
+          :id,:unique_location,   {}, {id:  "location_collection"}) %>
+      <% end %>
+      <br/>
+      <%= f.submit "Create", class: 'btn btn-primary'  %> 
+    </div>
+    <div class="clear"></div><br />
+    <h6 >&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Note:  If a person or location is not in the list contact your admin</h6>
   <% end %>
 </div>
+
 

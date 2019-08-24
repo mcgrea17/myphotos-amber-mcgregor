@@ -13,7 +13,7 @@ class LocationsController < ApplicationController
     def create
         @location = Location.create(location_params)
         if @location.valid?
-            redirect_to location_path
+            redirect_to new_location_path
           else
             render :new, status: :unprocessable_entity
           end
@@ -23,4 +23,6 @@ class LocationsController < ApplicationController
         def location_params
             params.require(:location).permit(:name, :address)
         end
+        
+    
 end

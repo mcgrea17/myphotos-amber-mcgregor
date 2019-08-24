@@ -11,19 +11,19 @@ class PhotosController < ApplicationController
     end
 
     def create
-        @photo =Photo.create(photo_params)
-        @photopeople = Photopeople.create(photopeople_params)
+        @photo = Photo.create(photo_params)
+       
         if @photo.valid?
           redirect_to root_path
         else
           render :new, status: :unprocessable_entity
         end
-      end
+    end
     
-      private
+    private
     
       def photo_params
-        params.require(:photo).permit(:location, :caption, :picture, :date)
+        params.require(:photo).permit(:location_id,  :caption, :picture, :date)
       end
 
       def photopeople_params
