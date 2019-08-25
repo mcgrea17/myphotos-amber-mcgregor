@@ -1,5 +1,5 @@
 class PhotosController < ApplicationController
-    before_action :authenticate_user!, only: [:new, :create]
+    before_action :authenticate_user!, only: [:new, :create, :show, :edit ]
 
     def index
         @photos = Photo.all
@@ -11,22 +11,29 @@ class PhotosController < ApplicationController
     end
 
     def create
-        @photo = Photo.create(photo_params)
+        @photo = current_user.photos.create(photo_params)
        
         if @photo.valid?
+         
           redirect_to root_path
         else
           render :new, status: :unprocessable_entity
         end
     end
+
+    def show
+    end
+
+    def edit
+    end
+
     
     private
-    
+      def people_params
+       params.require(:people).permit(people_ids: [])
+      end
       def photo_params
         params.require(:photo).permit(:location_id,  :caption, :picture, :date)
       end
 
-      def photopeople_params
-        params.require(:photopeople).permit(:people_id, :photo_id)
-      end
 end

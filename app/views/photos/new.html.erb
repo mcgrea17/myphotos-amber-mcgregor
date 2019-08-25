@@ -1,5 +1,10 @@
 <script>
+  
   $(function() {
+    var select_value = $('#location_collection').val();
+    $('#location_id').val(select_value);
+     console.log(select_value );
+       console.log("default" );
     $(document).on('change','#location_collection', function(){
        var select_value = $(this).val();
        $('#location_id').val(select_value);
@@ -11,11 +16,12 @@
   });
 </script>
 
-
-
+<% console %>
 <div class="booyah-box col-10 offset-1 ml-5">
   <h1> Enter Your Photo and Details</h1><br />
+ 
   <%= simple_form_for @photo do |f| %>
+
     <div class="container ">
       <div class="row">
         <div class="entry-box">
@@ -29,6 +35,7 @@
         </div>
         <div class="ml-15 float-right">
             <br/><br />
+            <%= f.association :people %>
             Select People in the Photos<br>
             <%= form_with model: @person do |person_form| %>
                 <%= person_form.collection_select(:person, Person.all.order(:lastName),

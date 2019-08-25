@@ -2,7 +2,7 @@ require 'rails_helper'
 
 
 RSpec.describe LocationsController, type: :controller do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
 
     before do
       

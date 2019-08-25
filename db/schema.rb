@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_24_205824) do
+ActiveRecord::Schema.define(version: 2019_08_25_220543) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,10 +18,8 @@ ActiveRecord::Schema.define(version: 2019_08_24_205824) do
   create_table "locations", force: :cascade do |t|
     t.string "name"
     t.text "address"
-    t.integer "location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["location_id"], name: "index_locations_on_location_id"
     t.index ["name", "address"], name: "index_locations_on_name_and_address", unique: true
   end
 
@@ -32,6 +30,11 @@ ActiveRecord::Schema.define(version: 2019_08_24_205824) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["firstName", "lastName", "birthday"], name: "index_people_on_firstName_and_lastName_and_birthday", unique: true
+  end
+
+  create_table "people_photos", id: false, force: :cascade do |t|
+    t.bigint "photo_id", null: false
+    t.bigint "person_id", null: false
   end
 
   create_table "photopeople", force: :cascade do |t|
@@ -47,8 +50,10 @@ ActiveRecord::Schema.define(version: 2019_08_24_205824) do
     t.datetime "updated_at", null: false
     t.string "picture"
     t.date "date"
-    t.integer "location_id"
+    t.bigint "location_id"
+    t.integer "user_id"
     t.index ["location_id"], name: "index_photos_on_location_id"
+    t.index ["user_id"], name: "index_photos_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -64,4 +69,5 @@ ActiveRecord::Schema.define(version: 2019_08_24_205824) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "photos", "locations"
 end

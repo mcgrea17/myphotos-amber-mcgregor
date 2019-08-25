@@ -18,6 +18,11 @@
     font-weight: 300;
   }
   
+  .blueimp-gallery > .slides > .slide-loading {
+    background: url(../img/loading.gif) center no-repeat;
+    background-size: 64px 64px;
+ }
+ 
   #infowindow-content .title {
     font-weight: bold;
   }

@@ -1,7 +1,9 @@
 class Photo < ApplicationRecord
     mount_uploader :picture, PictureUploader
-    has_many :photopersons
     validates :picture, presence: true
+    belongs_to :location
+    belongs_to :user
+    
 
     def self.search(term, current_page)
         if term

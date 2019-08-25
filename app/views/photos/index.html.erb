@@ -1,6 +1,7 @@
 <section>
   <br/> <br/>
   <div>
+  
       <a class="example-image-link" href="assets/pic3.JPG" data-lightbox="family-photos" data-title="The next image in the set is preloaded as you're viewing."><img class="example-image medium-image" src="assets/pic3.JPG" alt=""  /></a>
       <a class="example-image-link" href="assets/pic4.JPG" data-lightbox="family-photos" data-title="The next image in the set is preloaded as you're viewing."><img class="example-image medium-image" src="assets/pic4.JPG" alt=""  /></a>
       <a class="example-image-link" href="assets/image1.JPG" data-lightbox="family-photos" data-title="Click anywhere outside the image or the X to the right to close.">
@@ -25,10 +26,8 @@
         data: { lightbox: "example-set", title: photo.caption, }) %>  
           <br/>
           "<%= photo.caption %>"<br/>
-          <%= photo.location%><br/>
+         <%= photo.location.name %><br/>
           <%= photo.date%>
-        
-        
         </div>
      
     <% end %>

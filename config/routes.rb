@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :users
-  resources :locations
-  resources :people
   root 'photos#index'
-  resources :photos do
-    resources :photopeople
-  end
+  devise_for :users
+  resources :locations 
+  resources :photos
+  
+
+  resources :photos
+  resources :people
+ 
+  resources :photopeople
+    
 end
