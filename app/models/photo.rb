@@ -3,7 +3,9 @@ class Photo < ApplicationRecord
     validates :picture, presence: true
     belongs_to :location
     belongs_to :user
-    
+    has_many :photostars
+    has_many :people, through: :photostars
+    accepts_nested_attributes_for :photostars , reject_if: :all_blank, allow_destroy: true
 
     def self.search(term, current_page)
         if term

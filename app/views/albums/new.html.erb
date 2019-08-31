@@ -1,0 +1,60 @@
+<script>
+  
+  $(function() {
+    var select_value = $('#location_collection').val();
+    $('#location_id').val(select_value);
+    $(document).on('change','#location_collection', function(){
+       var select_value = $(this).val();
+       $('#location_id').val(select_value);
+       console.log(select_value );
+       console.log("location" );
+      
+     });
+    
+  });
+</script>
+
+  <h1> Enter Your Album  Details</h1><br />
+ 
+<%= simple_form_for @album do |f| %>
+    <div class="booyah-box  container col-10 offset-1 ml-5">
+        <div >
+            <div class="entry-box">
+                Enter a <%= f.label :name %> of the Album <br>
+                <%= f.text_field :name %>
+                <br /><br />
+                Enter <% f.label :startDate %> Start Date of Album <br/>
+                <%= f.text_field :startDate, data: {:provide => 'datepicker', :'date-format' => "yyyy-mm-dd"}   %><br/>
+                <br />
+                Enter <% f.label :endDate %> End Date of Album <br/>
+                <%= f.text_field :endDate, data: {:provide => 'datepicker', :'date-format' => "yyyy-mm-dd"}   %>
+            </div>
+            <br /><br />
+        </div>
+        <div >
+            <br/><br />
+            <%= f.fields_for :albumstar do | p | %> 
+                Select People in the Photos<br>
+                <%= p.collection_select(:person_ids, 
+                Person.all.order(:lastName), :id, :unique_person,
+                    {include_hidden: false}, {multiple: true} ) %><br />
+            <% end %>
+        </div>  
+        <br/>
+        Select Location <br/>
+            
+        <%= form_with model: @location do |location_form| %>
+            <%= f.hidden_field :location_id, id: "location_id" %>
+            <%= location_form.collection_select(:location, Location.all.order("name"), 
+            :id,:unique_location,   {include_blank: "Any Location"}, {id:  "location_collection"}) %>
+        <% end %>
+        <br/><br />
+        <%= f.submit 'Create', class: 'btn btn-primary'  %> 
+    </div>
+    <div class="clear"></div><br />
+    <h6 >&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Note:  If a person or location is not in the list contact your admin</h6>
+    
+    </div>
+<% end %>
+
+

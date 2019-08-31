@@ -41,6 +41,8 @@
   float: left;
 	width: 19%;
   margin-left: 5%;
+  color: #1418e0;
+  font-size:18px;
 }
 
 .box {
@@ -48,9 +50,10 @@
   padding-left: 1px;
 }
   .medium-image{
-    border-radius: 20px;
     width: 250px;
     margin-left: 10px;
+    border: 8px solid #f6f4f9;
+    border-radius: 32px;
   }
 
   .photo-image{
@@ -85,7 +88,10 @@
     color: #1418e0;
   }
  
-
+  h1 {
+    width: 50%;
+    margin-left: 25%;
+  }
   h2 {
     font-size:18px;
   }

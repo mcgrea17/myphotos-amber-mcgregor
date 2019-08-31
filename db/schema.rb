@@ -10,10 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_25_220543) do
+ActiveRecord::Schema.define(version: 2019_08_30_030300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "albums", force: :cascade do |t|
+    t.string "name"
+    t.integer "location_id"
+    t.date "startDate"
+    t.date "endDate"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "albumstars", force: :cascade do |t|
+    t.bigint "person_id"
+    t.bigint "album_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["album_id"], name: "index_albumstars_on_album_id"
+    t.index ["person_id"], name: "index_albumstars_on_person_id"
+  end
 
   create_table "locations", force: :cascade do |t|
     t.string "name"
@@ -37,13 +55,6 @@ ActiveRecord::Schema.define(version: 2019_08_25_220543) do
     t.bigint "person_id", null: false
   end
 
-  create_table "photopeople", force: :cascade do |t|
-    t.integer "people_id"
-    t.integer "photo_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "photos", force: :cascade do |t|
     t.string "caption"
     t.datetime "created_at", null: false
@@ -54,6 +65,15 @@ ActiveRecord::Schema.define(version: 2019_08_25_220543) do
     t.integer "user_id"
     t.index ["location_id"], name: "index_photos_on_location_id"
     t.index ["user_id"], name: "index_photos_on_user_id"
+  end
+
+  create_table "photostars", force: :cascade do |t|
+    t.bigint "person_id"
+    t.bigint "photo_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["person_id"], name: "index_photostars_on_person_id"
+    t.index ["photo_id"], name: "index_photostars_on_photo_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -69,5 +89,9 @@ ActiveRecord::Schema.define(version: 2019_08_25_220543) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "albumstars", "albums"
+  add_foreign_key "albumstars", "people"
   add_foreign_key "photos", "locations"
+  add_foreign_key "photostars", "people"
+  add_foreign_key "photostars", "photos"
 end

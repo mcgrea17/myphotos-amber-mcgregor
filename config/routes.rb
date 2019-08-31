@@ -3,11 +3,12 @@ Rails.application.routes.draw do
   devise_for :users
   resources :locations 
   resources :photos
-  
-
-  resources :photos
   resources :people
- 
-  resources :photopeople
+  resources :albums
+
+  resources :users, path: '' do 
+    resource :photos do 
+    end  
+  end
     
 end

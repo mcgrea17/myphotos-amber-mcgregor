@@ -1,0 +1,30 @@
+<div class="booyah-box col-6 offset-3">
+    <h1>Welcome to the Album Page </h1></div>
+    <%= link_to 'Add an Album', new_album_path, class: 'ml-5 btn btn-primary'  %>
+    <h6 >&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Note:  Click on Photo to Edit </h6>            
+
+    <div class="container booyah-box  row">    
+    <br/><br/>
+        <div >
+            <% @albums.each do |album| %>
+                <div class="album">
+                    <br/>
+                    <br/>
+                    <%= link_to( album.name, album_path(album)) %>
+                    <br/>
+                    <%= album.location.name %><br/>
+                    <%= album.startDate%>
+                    <%= album.endDate%>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
+<div class="clear" ></div>
+
+<%# <div class="apple_pagination">
+  <div class="page_info">
+    <%# <%= page_entries_info @tasks %>
+  <%# </div>
+  <%= will_paginate @tasks, :container => false %>
+<%# </div>  %>

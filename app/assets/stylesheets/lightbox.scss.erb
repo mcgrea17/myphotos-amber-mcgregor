@@ -1,6 +1,6 @@
 <%# /* Preload images */ %>
 
-body:after {
+.lightbox:after {
   content: url(<%= image_path('close.png')%>) url(<%= image_path('loading.gif')%>) url(<%= image_path('prev.png')%>) url(<%= image_path('next.png')%>);
   display: none;
 }
@@ -111,7 +111,7 @@ body.lb-disable-scrolling {
   width: 34%;
   left: 0;
   float: left;
-  background: url(../app/assets/images/prev.png) left 48% no-repeat;
+  background: url(../2app/assets/images/prev.png) left 48% no-repeat;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
   -webkit-transition: opacity 0.6s;
