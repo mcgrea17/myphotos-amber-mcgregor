@@ -20,7 +20,7 @@
     <div class="booyah-box  container col-10 offset-1 ml-5">
         <div >
             <div class="entry-box">
-                Enter a <%= f.label :name %> of the Album <br>
+                Enter a <% f.label :name %>Name of the Album <br>
                 <%= f.text_field :name %>
                 <br /><br />
                 Enter <% f.label :startDate %> Start Date of Album <br/>
@@ -33,12 +33,11 @@
         </div>
         <div >
             <br/><br />
-            <%= f.fields_for :albumstar do | p | %> 
-                Select People in the Photos<br>
-                <%= p.collection_select(:person_ids, 
-                Person.all.order(:lastName), :id, :unique_person,
-                    {include_hidden: false}, {multiple: true} ) %><br />
-            <% end %>
+             Select People in the Photos<br>
+               <%= f.collection_select(:person_ids, 
+               Person.all.order(:lastName), :id, :unique_person,
+                {}, {multiple: true, include_blank: false} ) %><br />
+
         </div>  
         <br/>
         Select Location <br/>

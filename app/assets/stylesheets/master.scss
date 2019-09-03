@@ -56,6 +56,25 @@
     border-radius: 32px;
   }
 
+  .album{
+    background: image_url('cov.jpg');
+    background-size: 100% 100%;
+    background-repeat: no;
+    width: 300px;
+    height: 250px;
+    border: 3px solid #f6f4f9;
+    border-radius: 32px;
+  }
+
+  .album-details{
+    float: left;
+    width: 80%;
+    margin-left: 17%;
+    margin-right: 19%;
+    color: #e0dfec;
+    font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
+    
+  }
   .photo-image{
     border: 8px solid #f6f4f9;
     width: 150px;
@@ -94,6 +113,10 @@
   }
   h2 {
     font-size:18px;
+  }
+
+  h4 {
+    font-family: 'Dancing Script', cursive;
   }
 
   body {

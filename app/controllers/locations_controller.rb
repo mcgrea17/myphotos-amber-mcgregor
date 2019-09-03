@@ -19,9 +19,19 @@ class LocationsController < ApplicationController
           end
     end
 
+    def destroy
+        @location = Location.find(params[:id])
+        if @location.user != current_user
+          return render plain: 'Not Allowed', status: :forbidden
+        end
+    
+        @location.destroy
+        redirect_to user_photos_path(current_user)
+    end
+      
     private
         def location_params
-            params.require(:location).permit(:name, :address)
+            params.require(:location).permit(:name, :address, :id)
         end
         
     

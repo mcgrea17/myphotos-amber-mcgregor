@@ -13,19 +13,8 @@ class PhotosController < ApplicationController
     end
 
     def create
-
-        @photo = current_user.photos.create(photo_params)
-        @photo.photostars.create(photo_photostar_attributes)
-      puts "HELLO THERE"
-      puts"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
       
-     puts photo_params
-    puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-        # if :person_ids?
-        #   params[:person_ids].each do |i|
-        #     Photostar.create(person_id: i[:id], photo_id: @photo.id)
-        #   end
-        # end
+        @photo = current_user.photos.create(photo_params)
 
         if @photo.valid?
          
@@ -77,10 +66,9 @@ class PhotosController < ApplicationController
     private
     
       def photo_params
-      
-        params.require(:photo).permit(:location_id, :caption, :picture, :date, :user_id, photo_photostar_attributes: [  :person_ids[]])
-        # Add [] to person_ids[] and they will be passed but then get parameter missing given 0 expeting 1..2
-        
-      end
+       
+        params.require(:photo).permit(:location_id, :caption, :picture, :date,
+          :user_id, person_ids: [])
+    end
 
 end

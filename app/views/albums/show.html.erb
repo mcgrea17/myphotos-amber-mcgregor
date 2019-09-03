@@ -1,1 +1,25 @@
 <h1>SHOW PAGE <h1>
+<h1>All Our Photos</h1>
+<div class="container booyah-box row">
+    <% @photos.each do |photo| %>
+      <div class="image-box">
+      
+        <%= link_to(image_tag(url_for(photo.picture.url), class: "photo-image", title: photo.caption), 
+        url_for(photo.picture.url),
+        data: { lightbox: "example-set", title: photo.caption, }) %>  
+          <br/>
+          "<%= photo.caption %>"<br/>
+         <%= photo.location.name %><br/>
+          <%= photo.date%>
+        </div>
+     
+    <% end %>
+</div>
+<div class="clear" ></div>
+
+<%# <div class="apple_pagination">
+  <div class="page_info">
+    <%# <%= page_entries_info @tasks %>
+  <%# </div>
+  <%= will_paginate @tasks, :container => false %>
+<%# </div> %> 

@@ -4,7 +4,7 @@ class Person < ApplicationRecord
     validates :firstName, uniqueness: { scope: [:firstName, :lastName, :birthday], message: "This person already exists!" }
     has_many :photostars
     has_many :photos, through: :photostars
-    has_many :albumstart
+    has_many :albumstars
     has_many :albums, through: :albumstars
     
     def unique_person

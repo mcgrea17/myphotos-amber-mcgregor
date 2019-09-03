@@ -1,5 +1,5 @@
 class AlbumsController < ApplicationController
-    before_action :authenticate_user!, only: [:new, :create,  :photos_by_user ]
+    before_action :authenticate_user!, only: [:new, :create,  :show ]
     skip_before_action :verify_authenticity_token, :only => [:update, :create ]
 
     def index
@@ -8,26 +8,15 @@ class AlbumsController < ApplicationController
 
     def new
         @album = Album.new
+        @album.albumstars.build
     end
 
     def create
-
-        @album = Album.create(album_params)
-       
-      puts "HELLO THERE"
-      puts"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-      
-     puts album_params
-    puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-        # if :person_ids?
-        #   params[:person_ids].each do |i|
-        #     Photostar.create(person_id: i[:id], photo_id: @photo.id)
-        #   end
-        # end
-
+        puts "HELLO THERE"
+        @album = current_user.albums.create(album_params)
+    
         if @album.valid?
-         
-          redirect_to album_path
+          redirect_to album_path(@album.id)
         else
           render :new, status: :unprocessable_entity
         end
@@ -36,9 +25,11 @@ class AlbumsController < ApplicationController
     def show
       @album = Album.find(params[:id])
       puts "###################"
-    #   @photos = @album.joins.photos.where('date >= ? and date <=  ? and location_id = ? ', 
-    #         @album.startDate, @album.endDate, @album.location_id)
-    #         # "%#{[:startDate]}%", "%#{album_params[:endDate]}%", "%#{album_params[:location_id]}%")
+      @location_id = params[:location_id]
+     
+       @photos = Photo.where('location_id = ?  and date >= ? and date <= ?', 
+             @album.location_id, @album.startDate, @album.endDate)
+            # "%#{[:startDate]}%", "%#{album_params[:endDate]}%", "%#{album_params[:location_id]}%")
         
     end
 
@@ -55,9 +46,8 @@ class AlbumsController < ApplicationController
     
       def album_params
       
-        params.require(:album).permit(:location_id, :startDate, :name, :endDate)
-        # Add [] to person_ids[] and they will be passed but then get parameter missing given 0 expeting 1..2
-        
+        params.require(:album).permit(:location_id, :startDate, :name, :endDate, person_ids: [] )
+
       end
 
 end

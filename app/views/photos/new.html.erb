@@ -32,22 +32,21 @@
         </div>
         <div class="ml-15 float-right">
             <br/><br />
-
-             <%= f.fields_for :photostar do | p | %> 
+            
                Select People in the Photos<br>
-               <%= p.collection_select(:person_ids, 
+               <%= f.collection_select(:person_ids, 
                Person.all.order(:lastName), :id, :unique_person,
-                {include_hidden: false}, {multiple: true} ) %><br />
-            <% end %>
+                {}, {multiple: true, include_blank: false} ) %><br />
+            
         </div>  
       </div>
-      Select Location <br/>
+       Select Location <br/>
       
       <%= form_with model: @location do |location_form| %>
       <%= f.hidden_field :location_id, id: "location_id" %>
           <%= location_form.collection_select(:location, Location.all.order("name"), 
           :id,:unique_location,   {}, {id:  "location_collection"}) %>
-      <% end %>
+      <% end %> 
       <br/>
       <%= f.submit 'Create', class: 'btn btn-primary'  %> 
     </div>

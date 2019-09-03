@@ -35,10 +35,13 @@
       <% else %>
         To add a new location contact your Admin.
       <% end %>
+      
       <br /><br />
       <%= form_with model: @location do |person_form| %>
-        <%= person_form.collection_select(:location, Location.all.order("name"),  :id, :unique_location,   {},{:multiple => true}) %>
-      <% end %>
+        <%= person_form.collection_select(:location, Location.all.order("name"),  :id, :unique_location,   {},{multiple:  true}) %>
+        <%# <br/><br/>
+        <%= link_to 'Delete', new_location_path(:location), method: :delete, data: {confirm: 'Are you sure you want to delete this Location?'}, class: 'btn btn-danger' %> %>
+    <% end %>
     </div>
   </div>
 </div>

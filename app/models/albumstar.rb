@@ -1,6 +1,5 @@
 class Albumstar < ApplicationRecord
-    belongs_to :person
-    belongs_to :album
-    has_one :person
-    has_one :album
+    belongs_to :person, inverse_of: :albumstars
+    belongs_to :album, inverse_of: :albumstars
+   
 end

@@ -1,6 +1,5 @@
 class Photostar < ApplicationRecord
-  belongs_to :person
-  belongs_to :photo
-  has_one :person
-  has_one :photo
+  belongs_to :person, inverse_of: :photostars
+  belongs_to :photo, inverse_of: :photostars
+  
 end
