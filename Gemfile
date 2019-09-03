@@ -83,5 +83,5 @@ gem 'devise'
 gem 'google_places'
 gem 'bootstrap-datepicker-rails'
 gem 'lightbox2-rails'
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 5.0'  
 
