@@ -1,6 +1,7 @@
 class AlbumsController < ApplicationController
     before_action :authenticate_user!, only: [:new, :create,  :show ]
     skip_before_action :verify_authenticity_token, :only => [:update, :create ]
+   
 
     def index
         @albums = Album.all

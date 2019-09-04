@@ -27,7 +27,8 @@
                 <%= f.text_field :startDate, data: {:provide => 'datepicker', :'date-format' => "yyyy-mm-dd"}   %><br/>
                 <br />
                 Enter <% f.label :endDate %> End Date of Album <br/>
-                <%= f.text_field :endDate, data: {:provide => 'datepicker', :'date-format' => "yyyy-mm-dd"}   %>
+                <%= f.text_field :endDate, 
+                data: {provide: 'datepicker', "date-format": "yyyy-mm-dd"}, error: 'Username is mandatory, please specify one'  %>
             </div>
             <br /><br />
         </div>

@@ -1,18 +1,12 @@
 <section>
   <br/> <br/>
   <div>
-  
-      <a class="example-image-link" href="assets/pic3.JPG" data-lightbox="family-photos" data-title="The next image in the set is preloaded as you're viewing."><img class="example-image medium-image" src="assets/pic3.JPG" alt=""  /></a>
-      <a class="example-image-link" href="assets/pic4.JPG" data-lightbox="family-photos" data-title="The next image in the set is preloaded as you're viewing."><img class="example-image medium-image" src="assets/pic4.JPG" alt=""  /></a>
-      <a class="example-image-link" href="assets/image1.JPG" data-lightbox="family-photos" data-title="Click anywhere outside the image or the X to the right to close.">
-        <img class="example-image medium-image" src="assets/image1.JPG" alt=""  /></a>
-      <a 
-        class="example-image-link" 
-        href="assets/pic5.JPG" 
-        data-lightbox="family-photos" 
-        data-title="Click anywhere outside the image or the X to the right to close.">
-        <img class="example-image medium-image" src="assets/pic5.JPG" alt="" />
-      </a>
+    <%= link_to(image_tag("image1.JPG", class: "photo-image1"), image_tag("image1.JPG"),data: { lightbox: "example-set" }) %> 
+    <%= link_to(image_tag("pic3.JPG", class: "photo-image1"), image_tag("pic3.JPG"),    data: { lightbox: "example-set" }) %>  
+    <%= link_to(image_tag("pic4.JPG", class: "photo-image1"), image_tag("pic4.JPG"),  data: { lightbox: "example-set" }) %> 
+    <%= link_to(image_tag("pic5.JPG", class: "photo-image1"), image_tag("pic5.JPG"),  data: { lightbox: "example-set" }) %> 
+    
+      
   </div>
 </section>
 
