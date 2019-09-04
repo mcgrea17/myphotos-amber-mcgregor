@@ -11,9 +11,9 @@
         <% @photos.each do |photo| %>
            <div class="image-box">
                 <br/>
-                <%= link_to(image_tag(url_for(photo.picture.url), 
+                <%= link_to(image_tag(photo.picture.url, 
                 class: "photo-image", title: photo.caption), 
-                url_for(edit_photo_path(photo.id))) %>  <br/>
+                edit_photo_path(photo.id)) %>  <br/>
                 <br/>
                 "<%= photo.caption %>"<br/>
                 <%= photo.location.name %><br/>
