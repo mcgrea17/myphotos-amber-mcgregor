@@ -1,19 +1,30 @@
-<h1>SHOW PAGE <h1>
-<h1>All Our Photos</h1>
-<div class="container booyah-box row">
-    <% @photos.each do |photo| %>
-      <div class="image-box">
-      
-        <%= link_to(image_tag(url_for(photo.picture.url), class: "photo-image", title: photo.caption), 
-        url_for(photo.picture.url),
-        data: { lightbox: "example-set", title: photo.caption, }) %>  
-          <br/>
-          "<%= photo.caption %>"<br/>
-         <%= photo.location.name %><br/>
-          <%= photo.date%>
-        </div>
-     
+
+<h1>  <%= @album.name %> <br /> </h1>
+ <h2>   <%= @album.location.name %> <br/>
+    <%= @album.startDate %> - <%= @album.endDate %> <br>
+    <% @album.people.each do |person| %>
+        <%= person.lastName %>, <%= person.firstName %> <br/>
     <% end %>
+ </h2>
+ <%# <%= @album.collection_select(:person_ids, 
+               Person.all.order(:lastName), :id, :unique_person,
+                {}, {multiple: true, include_blank: false} ) %><br/> %>
+<div class="container booyah-box">
+    <div class="row">
+        <% @photos.each do |photo| %>
+        <div class="image-box">
+        
+            <%= link_to(image_tag(url_for(photo.picture.url), class: "photo-image", title: photo.caption), 
+            url_for(photo.picture.url),
+            data: { lightbox: "example-set", title: photo.caption, }) %>  
+            <br/>
+            "<%= photo.caption %>"<br/>
+            <%= photo.location.name %><br/>
+            <%= photo.date%>
+        </div>
+        
+        <% end %>
+    </div>
 </div>
 <div class="clear" ></div>
 

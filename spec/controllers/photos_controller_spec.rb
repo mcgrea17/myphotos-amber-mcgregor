@@ -2,50 +2,38 @@ require 'rails_helper'
 
 
 RSpec.describe PhotosController, type: :controller do
-    let(:user) { FactoryBot.create(:user) }
+    let(:location) { FactoryBot.create(:location) }
 
-    before do
-      sign_in user
-    end
+
+
 
   describe "photos#new action" do
+
     it "should successfully show the new form" do
+        user = FactoryBot.create(:user)
+        sign_in user
           get :new
           expect(response).to have_http_status(:success)
     end
   end
 
   describe "photos#create action" do
-    it "should require users to be logged in" do
-        post :create, params: { photo: { caption: 'DisneyLand Photo', picture: 'test.jpg' } }
-        expect(response).to redirect_to user_photos_path(user)
-    end
+    
     
     it "should successfully create a new photo in our database" do
-        user = User.create(
-            email:                 'fakeuser@gmail.com',
-            password:              'secretPassword',
-            password_confirmation: 'secretPassword'
-          )
-          sign_in user
-    
-        post :create, params: { photo: { caption: 'DisneyLand Photo', picture: 'test.jpg' } }
-        expect(response).to redirect_to user_photos_path(user)
-    
-        photo = Photo.last
-        expect(photo.caption).to eq("DisneyLand Photo")
+        user = FactoryBot.create(:user)
+        sign_in user
+        photo = FactoryBot.create(:photo)
+        expect(response).to have_http_status(:success)
+        
     end
 
     it "should properly deal with validation errors" do
-        user = User.create(
-            email:                 'fakeuser@gmail.com',
-            password:              'secretPassword',
-            password_confirmation: 'secretPassword'
-          )
-          sign_in user
+        user = FactoryBot.create(:user)
+        sign_in user    
     
         photo_count = Photo.count
-        post :create, params: { photo: { name: '' } }
+        post :create, params: { photo: { caption: '', picture: fixture_file_upload("/picture.png", 'image/png') } }
         expect(response).to have_http_status(:unprocessable_entity)
         expect(Photo.count).to eq photo_count
     end
@@ -53,26 +41,23 @@ RSpec.describe PhotosController, type: :controller do
 
   describe "photos#update action" do
     it "shouldn't let unauthenticated users update a photo" do
-        photo = FactoryBot.create(:photo)
+        location = FactoryBot.create(:location)
+        photo = FactoryBot.create(:photo, location_id: location.id)
         user = FactoryBot.create(:user)
         sign_in user
         patch :update, params: { id: photo.id, photo: { caption: 'Disneyland' } }
         expect(response).to have_http_status(:forbidden)
     end
 
-    it "shouldn't let unauthenticated users update a photo" do
-        photo = FactoryBot.create(:photo)
-        get :update, params: { id: photo.id, gram: { caption: 'Disneyland' } }
-        expect(response).to redirect_to user_photos_path(current_user)
-    end
   
     it "should allow users to successfully update photos" do
-        gram = FactoryBot.create(:photo, message: "Initial Value")
-        sign_in gram.user
+        photo = FactoryBot.create(:photo)
+        sign_in photo.user
         patch :update, params: { id: photo.id, photo: {caption: 'Changed'}}
-        expect(response).to redirect_to user_photos_path(current_user)
+        
         photo.reload
-        expect(photo.cpation).to eq "Changed"
+        expect(photo.caption).to eq "Changed"
+        expect(response).to redirect_to user_photos_path(photo.user)
 
     end
 
@@ -80,37 +65,30 @@ RSpec.describe PhotosController, type: :controller do
         user = FactoryBot.create(:user)
         sign_in user
 
-        patch :update, params: { id: "YOLOSWAG", photo: { caption: 'Changed' } }
-        expect(response).to have_http_status(:not_found)          
+        expect { patch :update, params: { id: "YOLOSWAG", photo: { caption: 'Changed' } } }.to raise_exception(ActiveRecord::RecordNotFound)
+    
     end
 
     it "should render the edit form with an http status of unprocessable_entity" do
-        photo = FactoryBot.create(:photo, caption: "Initial Value")
+        photo = FactoryBot.create(:photo)
         sign_in photo.user
-        patch :update, params: { id: photo.id, photo: { caption: '' } }
+        patch :update, params: { id: photo.id, photo: { picture: '' } }
         expect(response).to have_http_status(:unprocessable_entity)
-        photo.reload
-        expect(photo.caption).to eq "Initial Value"
-      
     end
   end
 
 
 describe "photos#edit action" do
     it "shouldn't let a user who did not create the photo edit a photo" do
-        gram = FactoryBot.create(:photo)
+       
+        photo = FactoryBot.create(:photo)
         user = FactoryBot.create(:user)
         sign_in user
         get :edit, params: {id: photo.id}
         expect(response).to have_http_status(:forbidden)
     end
   
-    it "shouldn't let unauthenticated users edit a photo" do
-        gram = FactoryBot.create(:photo)
-        get :edit, params: { id: photo.id }
-        expect(response).to redirect_to user_photos_path(current_user)
-      end
-  
+   
 #     it "should successfully show edit form if the gram is found" do
 #         gram = FactoryBot.create(:gram)
 #         sign_in gram.user

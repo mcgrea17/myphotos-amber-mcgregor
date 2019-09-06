@@ -5,6 +5,7 @@ class AlbumsController < ApplicationController
 
     def index
         @albums = Album.all
+        
     end
 
     def new
@@ -13,7 +14,6 @@ class AlbumsController < ApplicationController
     end
 
     def create
-        puts "HELLO THERE"
         @album = current_user.albums.create(album_params)
     
         if @album.valid?
@@ -25,13 +25,11 @@ class AlbumsController < ApplicationController
 
     def show
       @album = Album.find(params[:id])
-      puts "###################"
       @location_id = params[:location_id]
      
        @photos = Photo.where('location_id = ?  and date >= ? and date <= ?', 
              @album.location_id, @album.startDate, @album.endDate)
-            # "%#{[:startDate]}%", "%#{album_params[:endDate]}%", "%#{album_params[:location_id]}%")
-        
+           
     end
 
     def edit

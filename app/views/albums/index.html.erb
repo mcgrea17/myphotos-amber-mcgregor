@@ -1,21 +1,25 @@
-<div class="booyah-box col-6 offset-3">
-    <h1>Welcome to the Album Page </h1></div>
+
+   <br/><br/>
     <%= link_to 'Add an Album', new_album_path, class: 'ml-5 btn btn-primary'  %>
     <h6 >&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Note:  Click on Album Title to View </h6>            
 
-    <div class="container booyah-box  row">    
+    <div class="container booyah-box">    
     <br/><br/>
-        <div >
+        <div class="row">
             <% @albums.each do |album| %>
                 <div class="album">
                     <div class="album-details">
                         <br/>
-                        <br/>
                         <h4>"<%= link_to( album.name, album_path(album)) %>"</h4>
                         <br/>
                         <%= album.location.name %><br/>
-                        <%= album.startDate%> - <br/>
-                        <%= album.endDate%>
+                        <%= album.startDate%> - 
+                        <%= album.endDate%><br/>
+                        <% if album.people %>
+                            <% album.people.each do |person| %>
+                                <%= person.lastName %>, <%= person.firstName %> <br/>
+                            <% end %>
+                        <% end %>
                     </div>
                 </div>
             <% end %>

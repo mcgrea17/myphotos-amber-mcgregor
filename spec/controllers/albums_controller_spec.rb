@@ -2,48 +2,37 @@ require 'rails_helper'
 
 RSpec.describe AlbumsController, type: :controller do
 
-    let(:user) { FactoryBot.create(:user) }
-
-    before do
-      sign_in user
-    end
 
   describe "albums#new action" do
     it "should successfully show the new form" do
+        user = FactoryBot.create(:user)
+        sign_in user
           get :new
           expect(response).to have_http_status(:success)
     end
   end
 
+  
+
   describe "albums#create action" do
     it "should require users to be logged in" do
-        post :create, params: { person: { name: 'my Album'} }
-        expect(response).to redirect_to album_path
+       
+        post :create, params: { album: { name: 'my Album', startDate: "2019-08-08", endDate: "2019-08-14"} }
+        expect(response).to redirect_to new_user_session_path
     end
     
     it "should successfully create a new album in our database" do
-        user = User.create(
-            email:                 'fakeuser@gmail.com',
-            password:              'secretPassword',
-            password_confirmation: 'secretPassword'
-          )
-          sign_in user
+        user = FactoryBot.create(:user)
+        sign_in user
     
-        post :create, params: { album: { name: 'my Album'} }
-        expect(response).to redirect_to album_path
-    
-        album = Album.last
-        expect(album.name).to eq("my Album")
+        album = FactoryBot.create(:album)
+        expect(response).to have_http_status(:success)
 
     end
 
     it "should properly deal with validation errors" do
-        user = User.create(
-            email:                 'fakeuser@gmail.com',
-            password:              'secretPassword',
-            password_confirmation: 'secretPassword'
-          )
-          sign_in user
+        user = FactoryBot.create(:user)
+        sign_in user
     
         album_count = Album.count
         post :create, params: { album: { name: '' } }
