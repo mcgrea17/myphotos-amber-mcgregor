@@ -3,7 +3,7 @@ class Album < ApplicationRecord
     validate :enddate_is_greater_than_or_equal_to
     belongs_to :location
     belongs_to :user
-    has_many :albumstars
+    has_many :albumstars, dependent: :delete_all
     has_many :people, through: :albumstars
     
 

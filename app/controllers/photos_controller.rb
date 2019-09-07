@@ -56,8 +56,9 @@ class PhotosController < ApplicationController
       if @photo.user != current_user
         return render plain: 'Not Allowed', status: :forbidden
       end
-  
+
       @photo.destroy
+      
       redirect_to user_photos_path(current_user)
     end
     

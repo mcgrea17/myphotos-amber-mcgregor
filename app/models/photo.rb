@@ -3,7 +3,7 @@ class Photo < ApplicationRecord
     validates :picture, presence: true
     belongs_to :location
     belongs_to :user
-    has_many :photostars
+    has_many :photostars, dependent: :delete_all
     has_many :people, through: :photostars
     
 
