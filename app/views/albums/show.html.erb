@@ -6,9 +6,7 @@
         <%= person.lastName %>, <%= person.firstName %> <br/>
     <% end %>
  </h2>
- <%# <%= @album.collection_select(:person_ids, 
-               Person.all.order(:lastName), :id, :unique_person,
-                {}, {multiple: true, include_blank: false} ) %><br/> %>
+ 
 <div class="container booyah-box">
     <div class="row">
         <% @photos.each do |photo| %>

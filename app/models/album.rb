@@ -1,15 +1,17 @@
 class Album < ApplicationRecord
     validates :name, presence: true
+    validate :enddate_is_greater_than_or_equal_to
     belongs_to :location
     belongs_to :user
     has_many :albumstars
     has_many :people, through: :albumstars
     
 
-    def enddate_is_greater_or_equal
-        if  ( startDate > endDate)
-            puts "ERROR"
-          errors.add(:endDate, 'End Date must be greater then or equal Start Date')
+    def enddate_is_greater_than_or_equal_to
+        if startDate.present? and endDate.present?
+            if  ( startDate > endDate)
+                errors.add(:endDate, 'End Date must be greater than or equal to Start Date')
+            end
         end
     end
    

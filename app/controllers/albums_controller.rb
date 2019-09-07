@@ -26,10 +26,28 @@ class AlbumsController < ApplicationController
     def show
       @album = Album.find(params[:id])
       @location_id = params[:location_id]
-     
-       @photos = Photo.where('location_id = ?  and date >= ? and date <= ?', 
-             @album.location_id, @album.startDate, @album.endDate)
-           
+      scope = Photo
+
+      if (@album.location.name != "Any Location")
+        puts "here"
+        scope = scope.where([ 'location_id = ?', "#{@album.location_id}" ])
+      else
+        # puts "wildcard"
+        # scope = scope.where([ 'location_id = ?', "*" ])
+      end
+
+      if (@album.startDate.present? || @album.endDate.present?)
+        if (@album.startDate.present? && @album.endDate.present?)
+            scope = scope.where([ ' date >= ? and date <= ?', "#{@album.startDate}", "#{@album.endDate}" ])
+        else
+            if (@album.startDate.present?)
+                scope = scope.where([ ' date = ', "#{@album.startDate}" ])
+            else
+                scope = scope.where([ ' date = ', "#{@album.endDate}" ])
+            end
+        end
+     end
+     @photos = scope.all   
     end
 
     def edit

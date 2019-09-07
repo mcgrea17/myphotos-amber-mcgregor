@@ -12,7 +12,9 @@
                         <br/>
                         <h4>"<%= link_to( album.name, album_path(album)) %>"</h4>
                         <br/>
-                        <%= album.location.name %><br/>
+                        <% if album.location.present? %>
+                            <%= album.location.name %><br/>
+                        <% end %>
                         <%= album.startDate%> - 
                         <%= album.endDate%><br/>
                         <% if album.people %>

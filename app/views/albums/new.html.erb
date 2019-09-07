@@ -6,9 +6,6 @@
     $(document).on('change','#location_collection', function(){
        var select_value = $(this).val();
        $('#location_id').val(select_value);
-       console.log(select_value );
-       console.log("location" );
-      
      });
     
   });
@@ -46,10 +43,20 @@
         <%= form_with model: @location do |location_form| %>
             <%= f.hidden_field :location_id, id: "location_id" %>
             <%= location_form.collection_select(:location, Location.all.order("name"), 
-            :id,:unique_location,   {include_blank: "Any Location"}, {id:  "location_collection"}) %>
+            :id,:unique_location,   {include_blank: false}, {id:  "location_collection"}) %>
         <% end %>
         <br/><br />
         <%= f.submit 'Create', class: 'btn btn-primary'  %> 
+        <% if @album.errors.any? %>
+         <div id="error_explanation">
+          <h2><%= pluralize(@album.errors.count, "error") %> prohibited this album from being saved:</h2>
+            <ul class="error">
+            <% @album.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+             <% end %>
+            </ul>
+         </div>
+        <% end %>
     </div>
     <div class="clear"></div><br />
     <h6 >&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Note:  If a person or location is not in the list contact your admin</h6>
