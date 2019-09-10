@@ -15,7 +15,8 @@
                         <% if album.location.present? %>
                             <%= album.location.name %><br/>
                         <% end %>
-                        <%= album.startDate%> - 
+                        <%= album.startDate%>
+                        <% if album.endDate.present? %> - <% end %> 
                         <%= album.endDate%><br/>
                         <% if album.people %>
                             <% album.people.each do |person| %>

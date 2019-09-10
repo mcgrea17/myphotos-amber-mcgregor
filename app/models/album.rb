@@ -5,6 +5,8 @@ class Album < ApplicationRecord
     belongs_to :user
     has_many :albumstars, dependent: :delete_all
     has_many :people, through: :albumstars
+    has_many :photostars, through: :people
+    has_many :photos, through: :photostars
     
 
     def enddate_is_greater_than_or_equal_to

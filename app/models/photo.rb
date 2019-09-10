@@ -5,7 +5,9 @@ class Photo < ApplicationRecord
     belongs_to :user
     has_many :photostars, dependent: :delete_all
     has_many :people, through: :photostars
-    
+    has_many :albumstars, through: :photostars
+  # scope :photos_in_album, ->{ joins(:photostars =>  :person).joins(:person => :albumstar).joins(:albumstar => :album)}
+    # scope :photos_in_album(:albumstar), ->{ joins(:photostars => :albumstars).where(person_id: :person_id)}
 
     def self.search(term, current_page)
         if term

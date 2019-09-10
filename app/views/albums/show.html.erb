@@ -1,7 +1,9 @@
 
 <h1>  <%= @album.name %> <br /> </h1>
  <h2>   <%= @album.location.name %> <br/>
-    <%= @album.startDate %> - <%= @album.endDate %> <br>
+    <%= @album.startDate %>  
+    <% if @album.endDate.present? %> - <% end %>  
+    <%= @album.endDate %> <br>
     <% @album.people.each do |person| %>
         <%= person.lastName %>, <%= person.firstName %> <br/>
     <% end %>

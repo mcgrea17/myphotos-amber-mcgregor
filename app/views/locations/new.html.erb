@@ -3,8 +3,6 @@
     $(document).on('click','#submit', function(){
        var select_value = $('#pac-input').val();
        $('#address1').val(select_value);
-      //  console.log(select_value );
-      //  console.log($('#address1').val());
      });
   });
 </script>
@@ -40,7 +38,7 @@
       <%= form_with model: @location do |person_form| %>
         <%= person_form.collection_select(:location, Location.all.order("name"),  :id, :unique_location,   {},{multiple:  true}) %>
         <%# <br/><br/>
-        <%= link_to 'Delete', new_location_path(:location), method: :delete, data: {confirm: 'Are you sure you want to delete this Location?'}, class: 'btn btn-danger' %> %>
+        <%= link_to 'Delete', new_location_path(:location), method: :delete, data: {confirm: 'Are you sure you want to delete this Location?'}, class: 'btn btn-danger' %>
     <% end %>
     </div>
   </div>
