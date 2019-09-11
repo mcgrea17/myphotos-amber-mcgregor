@@ -33,12 +33,13 @@
                     </div>
                     <div class="ml-15 float-right">
                         <br /><br />
-                        
-                        Select People in the Photos<br />
-                        <%= form_with model: @person do |person_form| %>
-                            <%= person_form.collection_select(:person, Person.all.order(:lastName),
-                            :id, :unique_person,   {}, {multiple: true}) %>
-                        <% end %>
+                        Select People in the Photos<br>
+                        <%= f.collection_select(:person_ids, 
+                        Person.all.order(:lastName), :id, :unique_person,
+                            {}, {multiple: true, include_blank: false} ) %><br />
+
+
+                    
                     </div>  
                 </div>
                 Select Location <br />

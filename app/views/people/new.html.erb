@@ -1,46 +1,54 @@
 
 <br/>
+<section>
+   
+<h1>People in the Photos</h1>
+<br/>
+</section>
+
 <div class="row">
-    <div class="people-image ml-5 mt-3 mb-5 ">
+    <div class="people-image  mt-3 mb-5 ">
         <%= image_tag 'pic3.JPG', class: 'photos-left'  %><br/>
         <%= image_tag "pic4.JPG",class: " photos-right"    %><br />
         <%= image_tag 'pic5.JPG', class: 'photos-left style_image_left img-fluid ' %><br /> 
-        <%= image_tag "pic5.JPG", class: "photos-right" %><br />
+        <%= image_tag "image1.JPG", class: "photos-right" %><br />
     </div>
-    <div class="booyah-box  ml-5 mb-5">
-  
-      <div class="container ml-3 ">
-        <br/>  
-        <% if current_user.try(:admin?) %>
-          <%= simple_form_for @person do |f| %> 
-              <%= f.input :firstName %>
-              <%= f.input :lastName %>
-            
-               <%= f.input :birthday, as: :date, html5: true%>
-              <br />  
-              <%= f.submit "Add a Person", class: 'btn btn-primary' %>    
+    <div class="booyah-box  width=70%  mb-5">
+      <div class="center-box">
+        <div class="container ml-3 ">
+          <br/>  
+          <% if current_user.try(:admin?) %>
+            <%= simple_form_for @person do |f| %> 
+                <%= f.input :firstName %>
+                <%= f.input :lastName %>
+              
+                <%= f.input :birthday, as: :date, html5: true%>
+                <br />  
+                <%= f.submit "Add a Person", class: 'btn btn-primary' %>    
+            <% end %>
+          <% else %>
+                To add a new person contact your Admin.
           <% end %>
-        <% else %>
-              To add a new person contact your Admin.
-        <% end %>
-        <br />
-      </div>
-      <div class="container mr-3 ">
-        <h2>People in our Photos</h2><br>
-        <% @people.each do |person| %>
-          <div class="box">
-            &nbsp<%= person.lastName %>, 
-            <%= person.firstName  %>
-            -    <%= person.birthday%><br />
-          </div>
-        <% end %>
+          <br />
+        </div>
+        <div class="container mr-3 ">
+          <h2>People in our Photos</h2><br>
+          <% @people.each do |person| %>
+            <div class="box">
+              &nbsp<%= person.lastName %>, 
+              <%= person.firstName  %>
+              -    <%= person.birthday%><br />
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
-    <div class="people-image ml-5 mt-3 mb-5 ">
+    <div class="people-image mt-3 mb-5 ">
         <%= image_tag 'pic3.JPG', class: 'photos-left'  %><br/>
         <%= image_tag "pic4.JPG",class: " photos-right"    %><br/>
         <%= image_tag 'pic5.JPG', class: 'photos-left style_image_left img-fluid ' %><br/> 
-        <%= image_tag "pic5.JPG", class: "photos-right" %> 
+        <%= image_tag "image1.JPG", class: "photos-right" %> 
+    </div>
 </div>
 <script>
 $('#datepicker').datepicker({format: 'yyyy-mm-dd'});

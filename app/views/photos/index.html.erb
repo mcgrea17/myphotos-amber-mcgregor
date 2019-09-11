@@ -1,3 +1,20 @@
+<script>
+  
+  $(function() {
+    
+    $( document ).ready('turbolinks:load', function() {
+     
+      $('.apple_pagination').remove();
+      $('body').append("<div class= 'apple_pagination'></div>");
+      $('.pagination').replaceWith('<%=  will_paginate(@photos) %>');
+      console.log("It works on each visit!")
+
+    })
+    
+  });
+</script>
+
+
 <section>
   <br/> <br/>
   <div>
@@ -7,9 +24,9 @@
     <%= image_tag("image1.JPG", class: "photo-image1")  %> 
    
   </div>
+<h1>All Our Photos</h1>
 </section>
 
-<h1>All Our Photos</h1>
 <div class="container booyah-box row">
     <% @photos.each do |photo| %>
       <div class="image-box">
