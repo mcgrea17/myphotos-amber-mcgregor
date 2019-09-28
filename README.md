@@ -6,4 +6,4 @@ This app will allow you to create a user login, which will allow you to upload p
 
 To view the app, here is a link to the deployed app:  https://myphotos-amber-mcgregor.herokuapp.com/
 
-![App](/images/myphotos.png)
+![App](/images/myphotos.PNG)
