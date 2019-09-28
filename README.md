@@ -1,6 +1,5 @@
-# README
+# README My Photos
 
-My Photos
  
 This app will allow you to create a user login, which will allow you to upload photos.  You can add the people, location and date of the photo.  You can also create albums with person/people, location and date range criteria.  This enables you to save your photos and organize them into albums.  An admin user can create the people and locations that are used in the drop downs for the uploaded photos.  The admin user/s is set in the user table when the admin field is set to true.
 
