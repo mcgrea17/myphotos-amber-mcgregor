@@ -6,4 +6,6 @@ This app will allow you to create a user login, which will allow you to upload p
 
 To view the app, here is a link to the deployed app:  https://myphotos-amber-mcgregor.herokuapp.com/
 
-![App](/images/myphotos.PNG)
+![screenshot](https://user-images.githubusercontent.com/34463810/65822529-afdbc500-e1fa-11e9-9b88-8f7ad7bff8fa.png)
+
+The app was created with Ruby on Rails, Ruby version 2.5.3.  
